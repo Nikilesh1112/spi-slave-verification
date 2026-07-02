@@ -8,9 +8,7 @@ functional coverage, and SystemVerilog Assertions (SVA).
 
 > **Note on scope**: this project deliberately avoids UVM, the factory
 > pattern, RAL, and complex macros. The goal is to demonstrate solid
-> DV fundamentals with plain, readable SystemVerilog - the kind of
-> code a strong fresher would write and be able to fully explain in
-> an interview.
+> DV fundamentals with plain, readable SystemVerilog.
 
 ---
 
