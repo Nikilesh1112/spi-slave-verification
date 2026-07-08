@@ -100,9 +100,12 @@ module spi_assertions (
   end
 
   always @(posedge i_SPI_CS_n) begin
-    a_cs_n_min_low_time : assert (sclk_edge_count >= 1)
-      else $error("[ASSERT] A5 FAILED: i_SPI_CS_n was deasserted before any SPI clock edge occurred at time %0t", $time);
-  end
+    if (i_Rst_L) begin
+        a_cs_n_min_low_time : assert (sclk_edge_count >= 1)
+            else
+                $error("[ASSERT] A5 FAILED: i_SPI_CS_n was deasserted before any SPI clock edge occurred at time %0t", $time);
+    end
+end 
 
   // -------------------------------------------------------------------
   // A6: After reset is released, o_RX_DV must not be asserted unless

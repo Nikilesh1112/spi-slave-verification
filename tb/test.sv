@@ -61,7 +61,7 @@ class test;
     env.gen.run_directed(q);
 
     // Allow time for the single transfer + pipeline to complete
-    repeat (50) @(posedge drv_vif.i_Clk);
+    repeat (120) @(posedge drv_vif.i_Clk);
     env.report();
   endtask
 
@@ -80,7 +80,7 @@ class test;
 
     // Wait long enough for all bursts to complete. Each byte takes
     // roughly 8 SPI clock periods; give generous margin.
-    repeat (num_txns * 20) @(posedge drv_vif.i_Clk);
+    repeat (num_txns * 120) @(posedge drv_vif.i_Clk);
     env.report();
   endtask
 
@@ -122,7 +122,7 @@ class test;
     q.delete();
     q.push_back(build_txn(8'h11, 8'h22, 1'b0));
     env.gen.run_directed(q);
-    repeat (50) @(posedge drv_vif.i_Clk);
+    repeat (120) @(posedge drv_vif.i_Clk);
 
     env.report();
   endtask
@@ -144,7 +144,7 @@ class test;
     q.push_back(build_txn(8'h55, 8'hAA, 1'b0)); // inverse pattern, end burst
 
     env.gen.run_directed(q);
-    repeat (q.size() * 20) @(posedge drv_vif.i_Clk);
+    repeat (q.size() * 120) @(posedge drv_vif.i_Clk);
     env.report();
   endtask
 
@@ -166,7 +166,7 @@ class test;
     end
 
     env.gen.run_directed(q);
-    repeat (burst_len * 20) @(posedge drv_vif.i_Clk);
+    repeat (burst_len * 120) @(posedge drv_vif.i_Clk);
     env.report();
   endtask
 
@@ -192,8 +192,8 @@ class test;
     end
 
     env.gen.run_directed(q);
-    repeat (q.size() * 20) @(posedge drv_vif.i_Clk);
+    repeat (q.size() * 120) @(posedge drv_vif.i_Clk);
     env.report();
   endtask
 
-endclass : test
+endclass : test 

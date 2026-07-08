@@ -73,7 +73,7 @@ module top_tb;
   // Waveform dumping (VCD, viewable with GTKWave or Verdi)
   // ---------------------------------------------------------------
   initial begin
-    $dumpfile("waves/spi_slave_tb.vcd");
+    $dumpfile("spi_slave_tb.vcd"); 
     $dumpvars(0, top_tb);
   end
 

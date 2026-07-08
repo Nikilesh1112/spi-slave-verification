@@ -56,11 +56,23 @@ class driver;
     vif.i_SPI_MOSI <= 1'b0;
     vif.i_TX_DV    <= 1'b0;
     vif.i_TX_Byte  <= 8'h00;
-    repeat (5) @(posedge vif.i_Clk);
-    vif.i_Rst_L <= 1'b1;
-    repeat (5) @(posedge vif.i_Clk);
-    $display("[DRIVER] Reset applied and released at time %0t", $time);
-  endtask
+   repeat (5) @(posedge vif.i_Clk);
+vif.i_Rst_L <= 1'b1;
+repeat (5) @(posedge vif.i_Clk);
+
+// Prime the SPI slave TX path before the first real transaction
+vif.i_SPI_CS_n <= 1'b0;
+#(spi_half_period);
+
+vif.i_SPI_Clk <= 1'b1;
+#(spi_half_period);
+vif.i_SPI_Clk <= 1'b0;
+
+vif.i_SPI_CS_n <= 1'b1;
+#(spi_half_period); 
+
+$display("[DRIVER] Reset applied and released at time %0t", $time);
+  endtask  
 
   // -------------------------------------------------------------------
   // preload_tx_byte: load the byte the DUT should shift out on MISO

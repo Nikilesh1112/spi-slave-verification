@@ -40,6 +40,7 @@ interface spi_if (input logic i_Clk);
   // Modport for the driver: drives SPI bus + system-side TX signals
   // ---------------------------------------------------------------------
   modport DRIVER (
+    input i_Clk,
     output i_Rst_L,
     output i_SPI_Clk,
     output i_SPI_MOSI,
